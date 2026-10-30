@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Cup Café | Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <div class="admin-header">
+            <div>
+                <h1>Golden Cup Café</h1>
+                <p>Booking Management Dashboard</p>
+            </div>
+
+            <a href="index.html">Back to Website</a>
+        </div>
+
+        <h2>Customer Bookings</h2>
+
+        <div id="bookingList"></div>
+
+    </div>
+
+    <style>
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            color: #6b3e26;
+        }
+
+        .admin-header a {
+            color: #8d6027;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 22px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            overflow-wrap: anywhere;
+        }
+
+        .booking-card h3 {
+            color: #6b3e26;
+        }
+
+        .booking-card p {
+            margin: 8px 0;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .booking-actions button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .accept {
+            background: #287a45;
+        }
+
+        .decline {
+            background: #b73535;
+        }
+
+        .delete {
+            background: #555;
+        }
+
+        .empty-message {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px;
+        }
+    </style>
+
+    <script>
+        function displayBookings() {
+            const bookingList = document.getElementById("bookingList");
+
+            const bookings = JSON.parse(
+                localStorage.getItem("coffeeBookings") || "[]"
+            );
+
+            bookingList.innerHTML = "";
+
+            if (bookings.length === 0) {
+                bookingList.innerHTML =
+                    '<div class="empty-message">No bookings available yet.</div>';
+                return;
+            }
+
+            bookings.forEach((booking, index) => {
+                const card = document.createElement("div");
+                card.className = "booking-card";
+
+                const heading = document.createElement("h3");
+                heading.textContent = "Booking " + booking.reference;
+                card.appendChild(heading);
+
+                const details = [
+                    ["Name", booking.name],
+                    ["Email", booking.email],
+                    ["Phone", booking.phone],
+                    ["Date", booking.date],
+                    ["Time", booking.time],
+                    ["Guests", booking.guests],
+                    ["Item", booking.item],
+                    ["Quantity", booking.quantity],
+                    ["Order Type", booking.orderType],
+                    ["Special Requests", booking.requests || "None"],
+                    ["Total", "R" + booking.total],
+                    ["Status", booking.status || "Pending"]
+                ];
+
+                details.forEach(([label, value]) => {
+                    const paragraph = document.createElement("p");
+                    paragraph.textContent = label + ": " + (value ?? "");
+                    card.appendChild(paragraph);
+                });
+
+                const actions = document.createElement("div");
+                actions.className = "booking-actions";
+
+                const accept = document.createElement("button");
+                accept.className = "accept";
+                accept.textContent = "Accept";
+                accept.onclick = () => updateStatus(index, "Accepted");
+
+                const decline = document.createElement("button");
+                decline.className = "decline";
+                decline.textContent = "Decline";
+                decline.onclick = () => updateStatus(index, "Declined");
+
+                const remove = document.createElement("button");
+                remove.className = "delete";
+                remove.textContent = "Delete";
+                remove.onclick = () => deleteBooking(index);
+
+                actions.append(accept, decline, remove);
+                card.appendChild(actions);
+
+                bookingList.appendChild(card);
+            });
+        }
+
+        function updateStatus(index, status) {
+            const bookings = JSON.parse(
+                localStorage.getItem("coffeeBookings") || "[]"
+            );
+
+            bookings[index].status = status;
+
+            localStorage.setItem(
+                "coffeeBookings",
+                JSON.stringify(bookings)
+            );
+
+            displayBookings();
+        }
+
+        function deleteBooking(index) {
+            if (!confirm("Delete this booking?")) {
+                return;
+            }
+
+            const bookings = JSON.parse(
+                localStorage.getItem("coffeeBookings") || "[]"
+            );
+
+            bookings.splice(index, 1);
+
+            localStorage.setItem(
+                "coffeeBookings",
+                JSON.stringify(bookings)
+            );
+
+            displayBookings();
+        }
+
+        displayBookings();
+    </script>
+
+</body>
+</html>

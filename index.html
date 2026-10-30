@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Cup Café | Coffee & Good Moments</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#home" class="logo">Golden Cup Café</a>
+
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#booking">Book a Table</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Golden Cup Café</h1>
+            <p>Fresh Coffee. Delicious Food. Beautiful Moments.</p>
+            <a href="#booking" class="main-button">Book a Table</a>
+        </div>
+    </section>
+
+    <section class="about section" id="about">
+        <div class="about-image"></div>
+
+        <div class="about-content">
+            <h2>About Our Café</h2>
+            <p>
+                Welcome to Golden Cup Café, a place where coffee lovers
+                can relax, enjoy delicious treats and spend quality time.
+            </p>
+            <p>
+                We believe in fresh coffee, friendly service
+                and a comfortable atmosphere.
+            </p>
+            <a href="#menu" class="main-button">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <section class="menu section" id="menu">
+        <h2>Our Menu</h2>
+        <p class="section-description">
+            Enjoy some of our favourite café selections.
+        </p>
+
+        <div class="menu-container">
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=700"
+                     alt="Cappuccino coffee">
+                <h3>Cappuccino</h3>
+                <p>Rich espresso with steamed milk.</p>
+                <span>R35</span>
+            </div>
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=700"
+                     alt="Iced coffee">
+                <h3>Iced Coffee</h3>
+                <p>Refreshing chilled coffee.</p>
+                <span>R40</span>
+            </div>
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700"
+                     alt="Fresh croissant">
+                <h3>Fresh Croissant</h3>
+                <p>A delicious freshly baked treat.</p>
+                <span>R28</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="booking-section section" id="booking">
+
+        <h2>Book a Table</h2>
+
+        <p class="section-description">
+            Complete the form below to request your reservation.
+        </p>
+
+        <form id="bookingForm">
+
+            <label for="customerName">Full Name</label>
+            <input type="text" id="customerName" required>
+
+            <label for="customerEmail">Email Address</label>
+            <input type="email" id="customerEmail" required>
+
+            <label for="customerPhone">Phone Number</label>
+            <input type="tel" id="customerPhone" required>
+
+            <label for="bookingDate">Booking Date</label>
+            <input type="date" id="bookingDate" required>
+
+            <label for="bookingTime">Booking Time</label>
+            <input type="time" id="bookingTime" required>
+
+            <label for="guests">Number of Guests</label>
+            <input type="number" id="guests" min="1" max="10" required>
+
+            <label for="item">Choose an Item</label>
+            <select id="item" required>
+                <option value="Cappuccino">Cappuccino - R35</option>
+                <option value="Iced Coffee">Iced Coffee - R40</option>
+                <option value="Fresh Croissant">Fresh Croissant - R28</option>
+            </select>
+
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" min="1" max="20" value="1" required>
+
+            <label for="orderType">Order Type</label>
+            <select id="orderType" required>
+                <option value="Dine In">Dine In</option>
+                <option value="Collection">Collection</option>
+            </select>
+
+            <label for="requests">Special Requests</label>
+            <textarea id="requests" rows="4"
+                      placeholder="Any special requests?"></textarea>
+
+            <button type="submit" class="main-button">
+                Submit Booking
+            </button>
+
+        </form>
+
+        <div id="bookingMessage" aria-live="polite"></div>
+
+    </section>
+
+    <section class="contact section" id="contact">
+        <h2>Contact Us</h2>
+
+        <p>We would love to hear from you.</p>
+        <p>Email: hello@goldencup.example</p>
+        <p>Location: Pretoria, South Africa</p>
+        <p>Opening Hours: Monday - Saturday, 08:00 - 18:00</p>
+    </section>
+
+    <footer>
+        <p>© 2026 Golden Cup Café. Website by Wayne Maswanganyi.</p>
+        <a href="admin.html">Admin Dashboard</a>
+    </footer>
+
+    <script>
+        const bookingForm = document.getElementById("bookingForm");
+        const bookingMessage = document.getElementById("bookingMessage");
+        const bookingDate = document.getElementById("bookingDate");
+
+        const today = new Date();
+
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        bookingDate.min = localToday;
+
+        bookingForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const prices = {
+                "Cappuccino": 35,
+                "Iced Coffee": 40,
+                "Fresh Croissant": 28
+            };
+
+            const item = document.getElementById("item").value;
+            const quantity = Number(document.getElementById("quantity").value);
+            const total = prices[item] * quantity;
+
+            const booking = {
+                reference: "GC-" + Date.now(),
+                name: document.getElementById("customerName").value,
+                email: document.getElementById("customerEmail").value,
+                phone: document.getElementById("customerPhone").value,
+                date: bookingDate.value,
+                time: document.getElementById("bookingTime").value,
+                guests: document.getElementById("guests").value,
+                item: item,
+                quantity: quantity,
+                orderType: document.getElementById("orderType").value,
+                requests: document.getElementById("requests").value,
+                total: total,
+                status: "Pending"
+            };
+
+            const bookings = JSON.parse(
+                localStorage.getItem("coffeeBookings") || "[]"
+            );
+
+            bookings.push(booking);
+
+            localStorage.setItem(
+                "coffeeBookings",
+                JSON.stringify(bookings)
+            );
+
+            bookingMessage.innerHTML = "";
+
+            const heading = document.createElement("h3");
+            heading.textContent = "Booking Submitted Successfully!";
+
+            const reference = document.createElement("p");
+            reference.textContent = "Reference: " + booking.reference;
+
+            const amount = document.createElement("p");
+            amount.textContent = "Estimated total: R" + total;
+
+            bookingMessage.append(heading, reference, amount);
+
+            bookingForm.reset();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fffaf3;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation */
+
+header {
+    background: #281810;
+    padding: 18px 7%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: #dcae58;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #dcae58;
+}
+
+/* Hero */
+
+.hero {
+    min-height: 550px;
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1600")
+        center/cover no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+
+.main-button {
+    display: inline-block;
+    background: #bd8b42;
+    color: white;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main-button:hover {
+    background: #8d6027;
+}
+
+/* General sections */
+
+.section {
+    padding: 70px 8%;
+}
+
+.section h2 {
+    font-size: 32px;
+    color: #6b3e26;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* About */
+
+.about {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+.about-image {
+    flex: 1;
+    min-height: 350px;
+    background:
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900")
+        center/cover;
+    border-radius: 10px;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-content h2 {
+    text-align: left;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+}
+
+/* Menu */
+
+.menu {
+    background: #f2e8dc;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.menu-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.menu-card h3 {
+    color: #6b3e26;
+    margin: 15px 0 5px;
+}
+
+.menu-card p {
+    padding: 0 10px;
+}
+
+.menu-card span {
+    display: block;
+    color: #bd8b42;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Booking */
+
+.booking-section {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.booking-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.booking-section label {
+    font-weight: bold;
+    color: #493020;
+    margin-top: 8px;
+}
+
+.booking-section input,
+.booking-section select,
+.booking-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.booking-section input:focus,
+.booking-section select:focus,
+.booking-section textarea:focus {
+    outline: 2px solid #bd8b42;
+}
+
+.booking-section button {
+    margin-top: 15px;
+}
+
+#bookingMessage {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f3eadc;
+    border-radius: 6px;
+    color: #493020;
+    overflow-wrap: anywhere;
+}
+
+/* Contact */
+
+.contact {
+    text-align: center;
+    background: #f2e8dc;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+
+/* Footer */
+
+footer {
+    background: #281810;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+footer a {
+    color: #dcae58;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Admin dashboard */
+
+.admin-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero-content h1 {
+        font-size: 34px;
+    }
+
+    .about {
+        flex-direction: column;
+    }
+
+    .about-image {
+        width: 100%;
+        min-height: 250px;
+    }
+
+    .menu-container {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-section {
+        margin: 25px 15px;
+        padding: 20px;
+    }
+}
